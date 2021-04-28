@@ -5,3 +5,8 @@
 [._]s[a-rt-v][a-z]
 [._]ss[a-gi-z]
 [._]sw[a-p]
+
+# Build directories
+esp32-arduino-lib-builder
+arduino-esp32
+dist
