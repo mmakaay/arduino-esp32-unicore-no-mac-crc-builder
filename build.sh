@@ -2,16 +2,18 @@
 
 set -e
 
-# Also used by esp32-arduino-lib-builder code.
-export ARDUINO_BRANCH="idf-release/v3.3"
-export IDF_BRANCH="release/v3.3"
+# Used by esp32-arduino-lib-builder code.
+export ARDUINO_BRANCH="1.0.6"
+export IDF_BRANCH="v3.3.5"
 export IDF_TARGET="esp32"
 
-LIB_BUILDER_REPO="https://github.com/espressif/esp32-arduino-lib-builder.git"
-ARDUINO_ESP32_REPO="https://github.com/espressif/arduino-esp32"
-
+# Used by this script.
 SCRIPT_DIR=`pwd`
+LIB_BUILDER_REPO="https://github.com/espressif/esp32-arduino-lib-builder.git"
+LIB_BUILDER_BRANCH="release/v3.3"
 LIB_BUILDER_DIR="${SCRIPT_DIR}/esp32-arduino-lib-builder"
+ARDUINO_ESP32_REPO="https://github.com/espressif/arduino-esp32"
+ARDUINO_ESP32_BRANCH=${ARDUINO_BRANCH}
 ARDUINO_ESP32_DIR="${SCRIPT_DIR}/arduino-esp32"
 
 # Install required packages.
@@ -22,10 +24,12 @@ sudo apt-get install \
 sudo pip install --upgrade pip
 
 # For building the unicore / MAC CRC-fixed libraries.
-git clone --depth 1 ${LIB_BUILDER_REPO} -b ${IDF_BRANCH} ${LIB_BUILDER_DIR}
+/bin/rm -fR ${LIB_BUILDER_DIR}
+git clone --depth 1 ${LIB_BUILDER_REPO} -b ${LIB_BUILDER_BRANCH} ${LIB_BUILDER_DIR}
 
 # The arduino-esp32 repo to patch with the libraries.
-git clone --depth 1 ${ARDUINO_ESP32_REPO} -b ${ARDUINO_BRANCH} ${ARDUINO_ESP32_DIR}
+/bin/rm -fR ${ARDUINO_ESP32_DIR}
+git clone --depth 1 ${ARDUINO_ESP32_REPO} -b ${ARDUINO_ESP32_BRANCH} ${ARDUINO_ESP32_DIR}
 
 # Configure unicore build.
 cd ${LIB_BUILDER_DIR}
