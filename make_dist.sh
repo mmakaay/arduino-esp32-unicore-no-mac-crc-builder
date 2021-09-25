@@ -36,5 +36,6 @@ rsync -va ${ARDUINO_ESP32_DIR}/ ${DIST_DIR}/
 
 echo ""
 echo "----------------------------------------------------------------------------"
-echo "Repo files update. You can now commit the files to GitHub if you like.
+echo "Repo files updated in ./dist
+echo "You can now commit the files to GitHub if you like."
 echo "----------------------------------------------------------------------------"
